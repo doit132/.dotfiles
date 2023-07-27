@@ -19,7 +19,8 @@ alias mk="mkdir -p"
 alias bat="batcat"
 alias install="sudo apt install -y"
 alias ..="cd .."
-alias ra=ranger
+# alias ra=ranger
+alias ra=joshuto
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
