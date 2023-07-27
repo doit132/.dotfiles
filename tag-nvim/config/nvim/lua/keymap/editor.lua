@@ -14,9 +14,9 @@ local plug_map = {
 		return et("<Plug>(accelerated_jk_gk)")
 	end):with_expr(),
 
-	-- Plugin persisted.nvim
+	-- Plugin: auto_session
 	["n|<leader>ss"] = map_cu("SessionSave"):with_noremap():with_silent():with_desc("session: Save"),
-	["n|<leader>sl"] = map_cu("SessionLoad"):with_noremap():with_silent():with_desc("session: Load current"),
+	["n|<leader>sr"] = map_cu("SessionRestore"):with_noremap():with_silent():with_desc("session: Restore"),
 	["n|<leader>sd"] = map_cu("SessionDelete"):with_noremap():with_silent():with_desc("session: Delete"),
 
 	-- Plugin: nvim-bufdel
@@ -87,6 +87,10 @@ local plug_map = {
 
 	-- Plugin suda.vim
 	["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
+
+	-- Plugin floaterm.lua
+	["n|tt"] = map_cu("FloatermNew"):with_silent():with_noremap():with_desc(""),
+	["n|tf"] = map_cu("FloatermNew fzf"):with_silent():with_noremap():with_desc(""),
 }
 
 bind.nvim_load_mapping(plug_map)

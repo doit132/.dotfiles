@@ -4,7 +4,7 @@ _G._command_panel = function()
 			return not string.find(lhs, "Þ")
 		end,
 		layout_config = {
-			width = 0.6,
+			width = 0.8,
 			height = 0.6,
 			prompt_position = "top",
 		},
@@ -13,7 +13,7 @@ end
 
 local _lazygit = nil
 _G._toggle_lazygit = function()
-	if vim.fn.executable("lazygit") == 1 then
+	if vim.fn.executable("lazygit") then
 		if not _lazygit then
 			_lazygit = require("toggleterm.terminal").Terminal:new({
 				cmd = "lazygit",

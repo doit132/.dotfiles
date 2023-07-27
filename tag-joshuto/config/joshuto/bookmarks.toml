@@ -1,6 +1,8 @@
 bookmark = [
   { key = "r", path = "/" },
   { key = "e", path = "/etc" },
+  { key = "d", path = "~/.dotfiles/" },
+  { key = "wn", path = "/mnt/d/Users/Documents/Config/nvim/" },
 
   { key = "h", path = "~/" },
 ]

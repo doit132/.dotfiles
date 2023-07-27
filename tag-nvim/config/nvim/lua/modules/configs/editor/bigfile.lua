@@ -15,8 +15,8 @@ return function()
 		end,
 	}
 
-	require("bigfile").setup({
-		filesize = 1, -- size of the file in MiB
+	require("bigfile").config({
+		filesize = 2, -- size of the file in MiB
 		pattern = { "*" }, -- autocmd pattern
 		features = { -- features to disable
 			"indent_blankline",
