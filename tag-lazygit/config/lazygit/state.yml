@@ -1,6 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/doit/.dotfiles
+    - /home/doit/.dotfiles/tag-astro-user/config/nvim/lua/user
+    - /home/doit/.config/nvim
 startuppopupversion: 5
 customcommandshistory: []
 hidecommandlog: false
