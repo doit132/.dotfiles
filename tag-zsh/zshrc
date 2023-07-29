@@ -21,6 +21,15 @@ alias install="sudo apt install -y"
 alias ..="cd .."
 # alias ra=ranger
 alias ra=joshuto
+alias armobjcopy=arm-linux-gnueabi-objcopy
+alias armld=arm-linux-gnueabi-ld
+alias armstrip=arm-linux-gnueabi-strip
+alias armobjdump=arm-linux-gnueabi-objdump
+alias armgcc=arm-linux-gnueabi-gcc
+alias armg++=arm-linux-gnueabi-g++
+alias armgcov=arm-linux-gnueabi-gcov
+alias armnm=arm-linux-gnueabi-gcc-nm
+alias armar=arm-linux-gnueabi-gcc-ar
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
