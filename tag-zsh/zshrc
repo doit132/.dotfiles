@@ -1,7 +1,11 @@
-export http_proxy='http://192.168.10.100:7890'  
-export https_proxy='http://192.168.10.100:7890'
-export ALL_PROXY='sock5://192.168.10.100:7890'
-export all_proxy='sock5://192.168.10.100:7890'
+export http_proxy='http://192.168.10.103:7890'  
+export https_proxy='http://192.168.10.103:7890'
+export ALL_PROXY='sock5://192.168.10.103:7890'
+export all_proxy='sock5://192.168.10.103:7890'
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/arm/arm-2009q3/bin:$PATH"
 
 # ==== 环境变量设置
 export "Desktop=/mnt/d/Users/Desktop/"
@@ -19,18 +23,20 @@ alias mk="mkdir -p"
 alias bat="batcat"
 alias install="sudo apt install -y"
 alias ..="cd .."
+alias ...="cd .. && cd .."
+alias ....="cd .. && cd .. && cd .."
 # alias ra=ranger
 alias ra=joshuto
-alias armobjcopy=arm-linux-gnueabi-objcopy
-alias armld=arm-linux-gnueabi-ld
-alias armstrip=arm-linux-gnueabi-strip
-alias armobjdump=arm-linux-gnueabi-objdump
-alias armgcc=arm-linux-gnueabi-gcc
-alias armg++=arm-linux-gnueabi-g++
-alias armgcov=arm-linux-gnueabi-gcov
-alias armnm=arm-linux-gnueabi-gcc-nm
-alias armar=arm-linux-gnueabi-gcc-ar
-
+alias armobjcopy=arm-none-linux-gnueabi-objcopy
+alias armld=arm-none-linux-gnueabi-ld
+alias armstrip=arm-none-linux-gnueabi-strip
+alias armobjdump=arm-none-linux-gnueabi-objdump
+alias armgcc=arm-none-linux-gnueabi-gcc
+alias armg++=arm-none-linux-gnueabi-g++
+alias armgcov=arm-none-linux-gnueabi-gcov
+alias armnm=arm-none-linux-gnueabi-nm
+alias armar=arm-none-linux-gnueabi-ar
+alias armas=arm-none-linux-gnueabi-as
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
