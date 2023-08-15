@@ -9,7 +9,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # export PATH="/usr/local/arm/arm-2009q3/bin:$PATH"
 # export PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin:$PATH"
 # export PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH"
-export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_armeb-linux-gnueabi/bin:$PATH"
+# export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_armeb-linux-gnueabi/bin:$PATH"
+export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabi/bin:$PATH"
 
 # ==== 环境变量设置
 export "Desktop=/mnt/d/Users/Desktop/"
@@ -41,6 +42,7 @@ alias armgcov=arm-none-linux-gnueabi-gcov
 alias armnm=arm-none-linux-gnueabi-nm
 alias armar=arm-none-linux-gnueabi-ar
 alias armas=arm-none-linux-gnueabi-as
+alias sudo='sudo env PATH=$PATH'
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
