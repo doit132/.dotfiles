@@ -1,19 +1,43 @@
-host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ") # 获取ip地址
-# echo $host_ip # 输出ip地址
-export http_proxy="http://$host_ip:7890"  
-export https_proxy="http://$host_ip:7890"
-export all_proxy="sock5://$host_ip:7890"
-export ALL_PROXY="sock5://$host_ip:7890"
+### add proxy begin
+export host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ") # 获取ip地址
+export socks_hostport=7890
+export http_hostport=7890
+alias proxy='
+    export https_proxy="http://${host_ip}:${http_hostport}"
+    export http_proxy="http://${host_ip}:${http_hostport}"
+    export ALL_PROXY="socks5://${host_ip}:${socks_hostport}"
+    export all_proxy="socks5://${host_ip}:${socks_hostport}"
+'
+alias unproxy='
+    unset ALL_PROXY
+    unset https_proxy
+    unset http_proxy
+    unset all_proxy
+'
+alias echoproxy='
+    echo $ALL_PROXY
+    echo $all_proxy
+    echo $https_proxy
+    echo $http_proxy
+'
+proxy
+echoproxy
+### add proxy end
 
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 export PATH="$HOME/.cargo/bin:$PATH"
-# 交叉编译工具链不能在.zshrc中设置环境变量, 不然sudo make的时候找不到, 需要到/etc/profile 文件中设置, 实验证明, 也没有什么效果, 不能使用 sudo make , 不然就报错, arm-none-linux-gnueabi-gcc 找不到
+
+### export cross_compiler path env begin
 # export PATH="/usr/local/arm/arm-2009q3/bin:$PATH"
 # export PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin:$PATH"
-# export PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH"
+export PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH"
 # export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_armeb-linux-gnueabi/bin:$PATH"
-export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabi/bin:$PATH"
+# export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabi/bin:$PATH"
+# export PATH="/usr/local/arm/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin:$PATH"
+# ARM_CROSS_COMPILER_PATH_REG_PATTERN=":\/usr\/local\/arm\/gcc-.*?\/bin"
+# alias removecrosscompilerpath='echo $PATH | sed -e "s/$ARM_CROSS_COMPILER_PATH_REG_PATTERN//g"'
+### export cross_compiler path env end 
 
 # ==== 环境变量设置
 export "Desktop=/mnt/d/Users/Desktop/"
@@ -21,6 +45,8 @@ export "Desktop=/mnt/d/Users/Desktop/"
 export "Config=/mnt/d/Users/Document/Config/"
 export "Document=/mnt/d/Users/Documents/"
 
+export ARCH=arm
+export CROSS_COMPILE=arm-linux-gnueabi-
 alias nv=nvim
 alias ls=exa
 alias ll="ls -l"
@@ -33,19 +59,18 @@ alias install="sudo apt install -y"
 alias ..="cd .."
 alias ...="cd .. && cd .."
 alias ....="cd .. && cd .. && cd .."
-alias proxy="~/.opt/proxy/proxy.sh"
 # alias ra=ranger
 alias ra=joshuto
-alias armobjcopy=arm-none-linux-gnueabi-objcopy
-alias armld=arm-none-linux-gnueabi-ld
-alias armstrip=arm-none-linux-gnueabi-strip
-alias armobjdump=arm-none-linux-gnueabi-objdump
-alias armgcc=arm-none-linux-gnueabi-gcc
-alias armg++=arm-none-linux-gnueabi-g++
-alias armgcov=arm-none-linux-gnueabi-gcov
-alias armnm=arm-none-linux-gnueabi-nm
-alias armar=arm-none-linux-gnueabi-ar
-alias armas=arm-none-linux-gnueabi-as
+alias armobjcopy=arm-linux-gnueabi-objcopy
+alias armld=arm-linux-gnueabi-ld
+alias armstrip=arm-linux-gnueabi-strip
+alias armobjdump=arm-linux-gnueabi-objdump
+alias armgcc=arm-linux-gnueabi-gcc
+alias armg++=arm-linux-gnueabi-g++
+alias armgcov=arm-linux-gnueabi-gcov
+alias armnm=arm-linux-gnueabi-nm
+alias armar=arm-linux-gnueabi-ar
+alias armas=arm-linux-gnueabi-as
 alias sudo='sudo env PATH=$PATH'
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

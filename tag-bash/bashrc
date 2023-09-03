@@ -1,9 +1,28 @@
-host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ") # 获取ip地址
-# echo $host_ip # 输出ip地址
-export http_proxy="http://$host_ip:7890"  
-export https_proxy="http://$host_ip:7890"
-export all_proxy="sock5://$host_ip:7890"
-export ALL_PROXY="sock5://$host_ip:7890"
+### add proxy begin
+export host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ") # 获取ip地址
+export socks_hostport=7890
+export http_hostport=7890
+alias proxy='
+    export https_proxy="https://${host_ip}:${http_hostport}"
+    export http_proxy="http://${host_ip}:${http_hostport}"
+    export ALL_PROXY="socks5://${host_ip}:${socks_hostport}"
+    export all_proxy="socks5://${host_ip}:${socks_hostport}"
+'
+alias unproxy='
+    unset ALL_PROXY
+    unset https_proxy
+    unset http_proxy
+    unset all_proxy
+'
+alias echoproxy='
+    echo $ALL_PROXY
+    echo $all_proxy
+    echo $https_proxy
+    echo $http_proxy
+'
+proxy
+echoproxy
+### add proxy end
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -94,15 +113,19 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+### alias begin
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
-alias proxy="~/.opt/proxy/proxy.sh"
+alias ..="cd .."
+alias ...="cd .. && cd .."
+alias ....="cd .. && cd .. && cd .."
 
 # Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
+# sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+### alias end
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -123,4 +146,11 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+    *) return;;
+esac
 
