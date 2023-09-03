@@ -1,4 +1,10 @@
 ### add proxy begin
+# is running in wsl
+if [[ $(grep -i Microsoft /proc/version) ]]; then
+
+CURRENT_ENV=WSL
+echo "Current environment is wsl2"
+
 export host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ") # 获取ip地址
 export socks_hostport=7890
 export http_hostport=7890
@@ -22,6 +28,13 @@ alias echoproxy='
 '
 proxy
 echoproxy
+fi
+
+# is running in virtural-machine
+if [[ none != `systemd-detect-virt` && $CURRENT_ENV -eq WSL ]]; then
+    echo "running in vir"
+
+fi
 ### add proxy end
 
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
