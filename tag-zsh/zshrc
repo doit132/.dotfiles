@@ -46,50 +46,70 @@ export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-### export cross_compiler path env begin
-# export PATH="/usr/local/arm/arm-2009q3/bin:$PATH"
-# export PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin:$PATH"
-# export PATH="/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH"
-# export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_armeb-linux-gnueabi/bin:$PATH"
-# export PATH="/usr/local/arm/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabi/bin:$PATH"
-export PATH="/usr/local/arm/gcc-linaro-6.2.1-2016.11-x86_64_arm-linux-gnueabihf/bin:$PATH"
-# export PATH="/usr/local/arm/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin:$PATH"
-# ARM_CROSS_COMPILER_PATH_REG_PATTERN=":\/usr\/local\/arm\/gcc-.*?\/bin"
-# alias removecrosscompilerpath='echo $PATH | sed -e "s/$ARM_CROSS_COMPILER_PATH_REG_PATTERN//g"'
-### export cross_compiler path env end 
 
-# ==== 环境变量设置
+# windows 路径环境变量
 export "Desktop=/mnt/d/Users/Desktop/"
-
 export "Config=/mnt/d/Users/Document/Config/"
 export "Document=/mnt/d/Users/Documents/"
 
+###  交叉编译工具链相关环境变量配置
+# 预编译相关的环境变量 
+export "C_INCLUDE_PATH=/usr/local/arm/include/freetype-2.4.10/include:$C_INCLUDE_PATH"
+export "C_INCLUDE_PATH=/usr/local/arm/include/freetype-2.4.10/include/freetype2:$C_INCLUDE_PATH"
+export "CPLUS_INCLUDE_PATH=/usr/local/arm/include/freetype-2.4.10/include:$CPLUS_INCLUDE_PATH"
+# 编译器相关的环境变量
 export ARCH=arm
-export CROSS_COMPILE=arm-linux-gnueabihf-
-alias nv=nvim
-alias ls=exa
+export CROSS_COMPILE=arm-buildroot-linux-gnueabihf-
+
+#### export cross_compiler path env begin
+export PATH="$PATH:/usr/local/arm/bin/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin"
+# export PATH="$PATH:/usr/local/arm/bin/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabi/bin"
+# export PATH="$PATH:/usr/local/arm/bin/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-linux-gnu/bin"
+# export PATH="$PATH:/usr/local/arm/bin/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin"
+# ARM_CROSS_COMPILER_PATH_REG_PATTERN=":\/usr\/local\/arm\/gcc-.*?\/bin"
+# alias removecrosscompilerpath='echo $PATH | sed -e "s/$ARM_CROSS_COMPILER_PATH_REG_PATTERN//g"'
+#### export cross_compiler path env end
+
+# 检查 nvim 命令是否存在
+if command -v nvim >/dev/null 2>&1; then
+  alias nv='nvim'
+elif command -v vim >/dev/null 2>&1; then
+  echo "nvim command not install"
+  alias nv='vim'
+else
+  echo "vim command not install"
+  alias nv='vi'
+fi
+
+# 检查 exa 命令是否存在
+if command -v exa >/dev/null 2>&1; then
+  alias ls='exa'
+else
+  echo "exa command not install, you can use: 'sudo apt-get install exa -y' to install"
+  alias ls='ls'
+fi
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="ls -al"
 alias lg=lazygit
 alias mk="mkdir -p"
-alias bat="batcat"
+# 检查 bat 命令是否存在
+if command -v batcat >/dev/null 2>&1; then
+  alias cat="batcat"
+else
+  echo "batcat command not install, you can use: 'sudo apt-get install bat -y' to install"
+  alias cat="cat"
+fi
 alias install="sudo apt install -y"
 alias ..="cd .."
 alias ...="cd .. && cd .."
 alias ....="cd .. && cd .. && cd .."
-# alias ra=ranger
-alias ra=joshuto
-alias armobjcopy=arm-linux-gnueabi-objcopy
-alias armld=arm-linux-gnueabi-ld
-alias armstrip=arm-linux-gnueabi-strip
-alias armobjdump=arm-linux-gnueabi-objdump
-alias armgcc=arm-linux-gnueabi-gcc
-alias armg++=arm-linux-gnueabi-g++
-alias armgcov=arm-linux-gnueabi-gcov
-alias armnm=arm-linux-gnueabi-nm
-alias armar=arm-linux-gnueabi-ar
-alias armas=arm-linux-gnueabi-as
+# 检查 joshuto 命令是否存在
+if command -v joshuto >/dev/null 2>&1; then
+  alias ra="joshuto"
+elif command -v ranger >/dev/null 2>&1; then
+  alias ra="ranger"
+fi
 alias sudo='sudo env PATH=$PATH'
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
